@@ -26,12 +26,12 @@ function createPhotoGallery() {
                     <div class="photo-caption">女生头像</div>
                 </div>
                 <div class="photo-item" data-date="2023-07-20">
-                    <img src="image/photo1.jpg" alt="照片3">
-                    <div class="photo-caption">美好时光</div>
+                    <img src="image/吃小龙虾.jpg" alt="照片3">
+                    <div class="photo-caption">无</div>
                 </div>
                 <div class="photo-item" data-date="2023-08-05">
                     <img src="image/photo2.jpg" alt="照片4">
-                    <div class="photo-caption">甜蜜瞬间</div>
+                    <div class="photo-caption">等待新的故事到来</div>
                 </div>
             </div>
         </div>

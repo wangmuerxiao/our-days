@@ -37,7 +37,24 @@
                 background-attachment: fixed;
                 min-height: 100vh;
             }
-            
+
+            :root {
+                --normal-text: #111b2d;
+                --glass-border: 1px double rgba(255, 255, 255, 0.36);
+                --glass-bg: rgba(255, 255, 255, 0.08);
+                --glass-radius: 15px;
+                --glass-shadow: inset 2px -2px 1px -1px rgba(255, 255, 255, 0.85), inset -2px 2px 1px -1px rgba(255, 255, 255, 0.75), inset 8px -8px 1px -7px rgba(255, 255, 255, 0.45), inset -8px 8px 1px -7px rgba(255, 255, 255, 0.42), inset 0 0 2px rgba(0, 0, 0, 0.7), 0 12px 30px rgba(0, 0, 0, 0.22);
+                --glass-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.62) 0%, rgba(255, 255, 255, 0.1) 34%, rgba(255, 255, 255, 0.03) 60%, rgba(255, 255, 255, 0.45) 100%);
+            }
+
+            .dynamic-text {
+                visibility: hidden;
+            }
+
+            .custom-data-ready .dynamic-text {
+                visibility: visible;
+            }
+
             .bg-wrap {
                 display: flex;
                 justify-content: center;
@@ -57,9 +74,51 @@
                 align-items: center;
                 position: relative;
                 padding: 20px;
-                background-color: rgba(0, 0, 0, 0.2);
-                border-radius: 15px;
                 margin: 20px;
+                background: transparent;
+                border-radius: var(--glass-radius);
+                border: var(--glass-border);
+                backdrop-filter: blur(10px) saturate(130%);
+                -webkit-backdrop-filter: blur(10px) saturate(130%);
+                box-shadow: var(--glass-shadow);
+                overflow: hidden;
+                isolation: isolate;
+            }
+
+            .middle.Blurkg::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: inherit;
+                background: var(--glass-highlight);
+                filter: blur(2px);
+                opacity: 0.45;
+                mix-blend-mode: soft-light;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            .middle.Blurkg::after {
+                content: "";
+                position: absolute;
+                top: 10px;
+                left: 16px;
+                right: 16px;
+                height: 45%;
+                border-radius: 14px;
+                border: 1px solid rgba(255, 255, 255, 0.28);
+                filter: blur(8px);
+                opacity: 0.4;
+                mix-blend-mode: overlay;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            .middle.Blurkg .img-male,
+            .middle.Blurkg .img-female,
+            .middle.Blurkg .love-icon {
+                position: relative;
+                z-index: 1;
             }
 
             .img-male {
@@ -99,12 +158,16 @@
             .shadow-blur {
                 margin-top: 28px;
                 font-size: 16px;
-                color: white;
-                background-color: rgba(0, 0, 0, 0.3);
-                padding: 1px 15px;
-                border-radius: 20px;
+                color: var(--normal-text);
+                background: rgba(255, 255, 255, 0.12);
+                border: 1px solid rgba(255, 255, 255, 0.32);
+                backdrop-filter: blur(8px) saturate(125%);
+                -webkit-backdrop-filter: blur(8px) saturate(125%);
+                padding: 4px 16px;
+                border-radius: 999px;
                 display: inline-block;
                 text-shadow: none;
+                box-shadow: inset 1px -1px 1px rgba(255, 255, 255, 0.45), inset -1px 1px 1px rgba(255, 255, 255, 0.4), 0 4px 12px rgba(0, 0, 0, 0.22);
             }
 
             @keyframes heartbeat {
@@ -128,6 +191,7 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                position: relative;
             }
 
             .img-female {
@@ -138,16 +202,34 @@
             }
 
             .baiyi-love {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: max-content;
+                max-width: calc(100vw - 24px);
                 text-align: center !important;
+                margin: 8px auto 10px;
+                padding: 10px 14px;
+                position: relative;
+                overflow: hidden;
+                background: transparent;
+                border: var(--glass-border);
+                border-radius: var(--glass-radius);
+                backdrop-filter: blur(10px) saturate(130%);
+                -webkit-backdrop-filter: blur(10px) saturate(130%);
+                box-shadow: var(--glass-shadow);
             }
 
             .baiyi-text {
                 font-size: 25px;
+                color: var(--normal-text);
             }
 
             #time-display {
                 text-align: center;
                 font-size: 20px;
+                color: var(--normal-text);
+                white-space: nowrap;
             }
 
             #time-display span {
@@ -169,13 +251,53 @@
             }
 
             .time_card {
-                background-color: rgba(51, 51, 51, 0.3);
-                color: white;
-                border-radius: 15px;
-                padding: 20px;
+                position: relative;
+                overflow: hidden;
+                color: var(--normal-text);
+                background: transparent;
+                border: var(--glass-border);
+                border-radius: var(--glass-radius);
+                backdrop-filter: blur(10px) saturate(130%);
+                -webkit-backdrop-filter: blur(10px) saturate(130%);
+                box-shadow: var(--glass-shadow);
+                padding: 16px;
                 width: calc(50% - 10px);
                 min-width: 300px;
                 transition: transform 0.3s ease;
+            }
+
+            .time_card::before {
+                content: "";
+                position: absolute;
+                inset: 0;
+                border-radius: inherit;
+                background: var(--glass-highlight);
+                filter: blur(3px);
+                opacity: 0.42;
+                mix-blend-mode: soft-light;
+                pointer-events: none;
+                z-index: 0;
+            }
+
+            .time_card::after {
+                content: "";
+                position: absolute;
+                top: 8px;
+                left: 10px;
+                right: 10px;
+                height: 35%;
+                border-radius: 12px;
+                border: 1px solid rgba(255, 255, 255, 0.23);
+                filter: blur(7px);
+                pointer-events: none;
+                opacity: 0.35;
+                mix-blend-mode: overlay;
+                z-index: 0;
+            }
+
+            .time_card .day_cont {
+                position: relative;
+                z-index: 1;
             }
 
             .time_card:hover {
@@ -192,29 +314,32 @@
                 fill: #ff6b6b;
                 width: 30px;
                 height: 30px;
+                filter: drop-shadow(0 6px 6px rgba(0, 0, 0, 0.25));
             }
 
             .day_title {
                 font-size: 1.2rem;
                 font-weight: bold;
+                color: #111;
             }
 
             .time_m {
                 display: flex;
                 flex-direction: column;
                 font-size: 1rem;
+                gap: 4px;
             }
             
             .subtitle {
                 font-size: 0.8rem;
-                color: #ccc;
+                color: #4b5c72;
                 margin-top: 5px;
                 font-style: italic;
             }
             
             .progress-container {
                 width: 100%;
-                background-color: rgba(255, 255, 255, 0.2);
+                background: rgba(255, 255, 255, 0.1);
                 border-radius: 10px;
                 margin-top: 8px;
                 height: 6px;
@@ -231,7 +356,7 @@
             }
             
             .progress-text {
-                color: white;
+                color: #000;
                 font-size: 0.7rem;
                 margin-top: 3px;
                 text-align: right;
@@ -239,10 +364,15 @@
 
             .source {
                 font-weight: bold;
+                color: #111;
+                font-size: 0.95rem;
             }
 
             .format {
-                color: #ccc;
+                color: #000;
+                font-size: 0.82rem;
+                font-style: normal;
+                line-height: 1.45;
             }
 
             @media (max-width: 767px) {
@@ -557,7 +687,7 @@
                             <img draggable="false" class="avatarFrame lazy entered loaded" src="image/gua.png" style="transform: scale(1.6);top: 2px;left: 2px;" data-ll-status="loaded">
                             <img class="aiv_touxiang entered loaded" src="image/nan.jpg">
                         </div>
-                        <span class="shadow-blur" id="person1Name">王标</span>
+                        <span class="shadow-blur dynamic-text" id="maleAvatarName">王标</span>
                     </div>
                     <div class="love-icon">
                         <img draggable="false" src="image/xin.png" style="width: 100%; height: 100%; object-fit: contain;">
@@ -567,7 +697,7 @@
                             <img draggable="false" class="avatarFrame lazy entered loaded" src="image/gua.png" style="transform: scale(1.6);top: 2px;left: 2px;" data-ll-status="loaded">
                             <img class="aiv_touxiang entered loaded" src="image/nv.jpg">
                         </div>
-                        <span class="shadow-blur" id="person2Name">玉儿</span>
+                        <span class="shadow-blur dynamic-text" id="femaleAvatarName">芸熙</span>
                     </div>
                 </div>
             </div>
@@ -584,10 +714,10 @@
                             <path d="M810 249.5c-38.6-38.6-83.5-68.8-133.5-90-51.8-21.9-106.8-33-163.5-33s-111.7 11.1-163.5 33c-50 21.2-94.9 51.4-133.5 90-38.6 38.6-68.8 83.5-90 133.5-21.9 51.8-33 106.8-33 163.5s11.1 111.7 33 163.5c21.2 50 51.4 94.9 90 133.5s83.5 68.8 133.5 90c51.8 21.9 106.8 33 163.5 33s111.7-11.1 163.5-33c50-21.2 94.9-51.4 133.5-90S878.8 760 900 710c21.9-51.8 33-106.8 33-163.5S921.9 434.8 900 383c-21.2-50-51.5-94.9-90-133.5z m-297 657c-198.5 0-360-161.5-360-360s161.5-360 360-360 360 161.5 360 360-161.5 360-360 360zM357 96.5c-42.3-49.6-141-53.3-208.1 4s-77.3 153.9-35 203.5L357 96.5zM877.2 100.5C810 43.2 711.3 47 669 96.5L912.2 304c42.3-49.6 32.1-146.2-35-203.5z" p-id="9367" fill="#ffffff"></path>
                             <path d="M667.1 558.6H543V351c0-17.9-14.5-32.4-32.4-32.4-15.2 0-27.6 12.3-27.6 27.6v272.4h182.2c17.1 0 30.9-13.8 30.9-30.9 0-16.1-13-29.1-29-29.1z" p-id="9368" fill="#ffffff"></path>
                         </svg>
-                        <span class="day_title" id="anniversaryTitle">周年纪念日</span>
+                        <span class="day_title dynamic-text" id="anniversaryTitle">周年纪念日</span>
                     </div>
                     <div class="time_m">
-                        <b class="source" id="anniversaryDate">2021-08-07</b>
+                        <b class="source dynamic-text" id="anniversaryDate">2024-07-29</b>
                         <i class="format" id="countdownDisplay"></i>
                     </div>
                 </div>
@@ -598,10 +728,10 @@
                         <svg t="1715052082901" style="margin-right:0.5rem!important;" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4508" width="100" height="100">
                             <path d="M470.4 204.8l44.8 44.8 44.8-44.8c99.2-99.2 262.4-99.2 361.6 0 48 48 73.6 112 73.6 179.2 0 19.2-12.8 32-32 32s-32-12.8-32-32c0-51.2-19.2-99.2-57.6-134.4-73.6-73.6-195.2-73.6-272 0l-67.2 67.2c-12.8 12.8-32 12.8-44.8 0l-67.2-67.2c-73.6-73.6-195.2-73.6-272 0-73.6 73.6-73.6 195.2 0 272L512 883.2c12.8 12.8 12.8 32 0 44.8s-32 12.8-44.8 0L105.6 566.4c-99.2-99.2-99.2-262.4 0-361.6 102.4-102.4 262.4-102.4 364.8 0z m176 710.4L425.6 694.4c-57.6-57.6-57.6-147.2 0-204.8 57.6-57.6 147.2-57.6 204.8 0l57.6 57.6 57.6-57.6c57.6-57.6 147.2-57.6 204.8 0 57.6 57.6 57.6 147.2 0 204.8L729.6 915.2c-9.6 9.6-25.6 16-38.4 16-19.2 0-32-6.4-44.8-16z m256-265.6c32-32 32-83.2 0-112-32-32-83.2-32-112 0l-80 80c-12.8 12.8-32 12.8-44.8 0l-80-80c-32-32-83.2-32-112 0-32 32-32 83.2 0 112L688 864l214.4-214.4z" p-id="4509" fill="#ffffff"></path>
                         </svg>
-                        <span class="day_title" id="firstMeetTitle">我们第一次相遇的坐标</span>
+                        <span class="day_title dynamic-text" id="firstMeetTitle">我们第一次相遇的坐标</span>
                     </div>
                     <div class="time_m">
-                        <b class="source" id="firstMeetDate">2021-08-07</b>
+                        <b class="source dynamic-text" id="firstMeetDate">2024-07-29</b>
                         <i class="format" id="firstMeetCountdown"></i>
                     </div>
                 </div>
@@ -614,11 +744,11 @@
                         <svg t="1715052082901" style="margin-right:0.5rem!important;" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4508" width="100" height="100">
                             <path d="M470.4 204.8l44.8 44.8 44.8-44.8c99.2-99.2 262.4-99.2 361.6 0 48 48 73.6 112 73.6 179.2 0 19.2-12.8 32-32 32s-32-12.8-32-32c0-51.2-19.2-99.2-57.6-134.4-73.6-73.6-195.2-73.6-272 0l-67.2 67.2c-12.8 12.8-32 12.8-44.8 0l-67.2-67.2c-73.6-73.6-195.2-73.6-272 0-73.6 73.6-73.6 195.2 0 272L512 883.2c12.8 12.8 12.8 32 0 44.8s-32 12.8-44.8 0L105.6 566.4c-99.2-99.2-99.2-262.4 0-361.6 102.4-102.4 262.4-102.4 364.8 0z m176 710.4L425.6 694.4c-57.6-57.6-57.6-147.2 0-204.8 57.6-57.6 147.2-57.6 204.8 0l57.6 57.6 57.6-57.6c57.6-57.6 147.2-57.6 204.8 0 57.6 57.6 57.6 147.2 0 204.8L729.6 915.2c-9.6 9.6-25.6 16-38.4 16-19.2 0-32-6.4-44.8-16z m256-265.6c32-32 32-83.2 0-112-32-32-83.2-32-112 0l-80 80c-12.8 12.8-32 12.8-44.8 0l-80-80c-32-32-83.2-32-112 0-32 32-32 83.2 0 112L688 864l214.4-214.4z" p-id="4509" fill="#ffffff"></path>
                         </svg>
-                        <span class="day_title">你来这人间的一天（王标）</span>
+                        <span class="day_title dynamic-text" id="maleBirthdayTitle">你来这人间的一天（王标）</span>
                     </div>
                     <div class="time_m">
-                        <b class="source">2005-07-06</b>
-                        <i class="format"></i>
+                        <b class="source dynamic-text" id="maleBirthdayDate">2005-07-06</b>
+                        <i class="format" id="maleBirthdayCountdown"></i>
                     </div>
                 </div>
             </div>
@@ -628,15 +758,94 @@
                         <svg t="1715052082901" style="margin-right:0.5rem!important;" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4508" width="100" height="100">
                             <path d="M470.4 204.8l44.8 44.8 44.8-44.8c99.2-99.2 262.4-99.2 361.6 0 48 48 73.6 112 73.6 179.2 0 19.2-12.8 32-32 32s-32-12.8-32-32c0-51.2-19.2-99.2-57.6-134.4-73.6-73.6-195.2-73.6-272 0l-67.2 67.2c-12.8 12.8-32 12.8-44.8 0l-67.2-67.2c-73.6-73.6-195.2-73.6-272 0-73.6 73.6-73.6 195.2 0 272L512 883.2c12.8 12.8 12.8 32 0 44.8s-32 12.8-44.8 0L105.6 566.4c-99.2-99.2-99.2-262.4 0-361.6 102.4-102.4 262.4-102.4 364.8 0z m176 710.4L425.6 694.4c-57.6-57.6-57.6-147.2 0-204.8 57.6-57.6 147.2-57.6 204.8 0l57.6 57.6 57.6-57.6c57.6-57.6 147.2-57.6 204.8 0 57.6 57.6 57.6 147.2 0 204.8L729.6 915.2c-9.6 9.6-25.6 16-38.4 16-19.2 0-32-6.4-44.8-16z m256-265.6c32-32 32-83.2 0-112-32-32-83.2-32-112 0l-80 80c-12.8 12.8-32 12.8-44.8 0l-80-80c-32-32-83.2-32-112 0-32 32-32 83.2 0 112L688 864l214.4-214.4z" p-id="4509" fill="#ffffff"></path>
                         </svg>
-                        <span class="day_title">光落在你身上的日子（李玉佩）</span>
+                        <span class="day_title dynamic-text" id="femaleBirthdayTitle">光落在你身上的日子（路芸熙）</span>
                     </div>
                     <div class="time_m">
-                        <b class="source">2006-10-08</b>
-                        <i class="format"></i>
+                        <b class="source dynamic-text" id="femaleBirthdayDate">2006-9-13</b>
+                        <i class="format" id="femaleBirthdayCountdown"></i>
                     </div>
                 </div>
             </div>
         </div>
+        <script>
+            window.getCachedCustomData = function() {
+                try {
+                    const cachedText = localStorage.getItem('countdown-custom-data-cache');
+                    return cachedText ? JSON.parse(cachedText) : null;
+                } catch (error) {
+                    console.warn('读取本地缓存失败：', error);
+                    return null;
+                }
+            };
+
+            window.saveCachedCustomData = function(data) {
+                try {
+                    localStorage.setItem('countdown-custom-data-cache', JSON.stringify(data));
+                } catch (error) {
+                    console.warn('写入本地缓存失败：', error);
+                }
+            };
+
+            window.setCustomDataReady = function() {
+                document.documentElement.classList.add('custom-data-ready');
+            };
+
+            window.applyCustomDataToPage = function(data) {
+                if (!data) {
+                    return;
+                }
+
+                const maleAvatarNameElement = document.getElementById('maleAvatarName');
+                const femaleAvatarNameElement = document.getElementById('femaleAvatarName');
+                const anniversaryDateElement = document.getElementById('anniversaryDate');
+                const firstMeetDateElement = document.getElementById('firstMeetDate');
+                const maleBirthdayDateElement = document.getElementById('maleBirthdayDate');
+                const femaleBirthdayDateElement = document.getElementById('femaleBirthdayDate');
+                const maleBirthdayTitleElement = document.getElementById('maleBirthdayTitle');
+                const femaleBirthdayTitleElement = document.getElementById('femaleBirthdayTitle');
+
+                if (maleAvatarNameElement && data.maleAvatarName) {
+                    maleAvatarNameElement.textContent = data.maleAvatarName;
+                }
+                if (femaleAvatarNameElement && data.femaleAvatarName) {
+                    femaleAvatarNameElement.textContent = data.femaleAvatarName;
+                }
+                if (anniversaryDateElement && data.acquaintanceDateDay) {
+                    anniversaryDateElement.textContent = data.acquaintanceDateDay;
+                }
+                if (firstMeetDateElement && data.acquaintanceDateDay) {
+                    firstMeetDateElement.textContent = data.acquaintanceDateDay;
+                }
+                if (maleBirthdayDateElement && data.maleBirthday) {
+                    maleBirthdayDateElement.textContent = data.maleBirthday;
+                }
+                if (femaleBirthdayDateElement && data.femaleBirthday) {
+                    femaleBirthdayDateElement.textContent = data.femaleBirthday;
+                }
+                if (maleBirthdayTitleElement && data.maleBirthdayTitleName) {
+                    maleBirthdayTitleElement.textContent = '你来这人间的一天（' + data.maleBirthdayTitleName + '）';
+                }
+                if (femaleBirthdayTitleElement && data.femaleBirthdayTitleName) {
+                    femaleBirthdayTitleElement.textContent = '光落在你身上的日子（' + data.femaleBirthdayTitleName + '）';
+                }
+
+                if (data.acquaintanceDateTime) {
+                    window.__customStartDateStr = data.acquaintanceDateTime;
+                    if (typeof startDateStr !== 'undefined') {
+                        startDateStr = data.acquaintanceDateTime;
+                        startDate = new Date(formatToISO8601(startDateStr));
+                    }
+                }
+            };
+
+            (function preloadCustomData() {
+                const cachedData = window.getCachedCustomData();
+                if (cachedData) {
+                    window.applyCustomDataToPage(cachedData);
+                    window.setCustomDataReady();
+                }
+            })();
+        </script>
         <script>
             function formatToISO8601(dateStr) {
                 var parts = dateStr.split(' ');
@@ -645,97 +854,87 @@
                 return dateParts[0] + '-' + (dateParts[1].length === 1 ? '0' : '') + dateParts[1] + '-' + (dateParts[2].length === 1 ? '0' : '') + dateParts[2] + 'T' + timeParts[0] + ':' + timeParts[1] + ':' + timeParts[2];
             }
 
-            // 时间显示功能将在页面底部初始化，确保PersonalConfig已加载
-            
-            // 使用配置文件初始化页面内容
-            function initPageWithConfig() {
-                // 更新人名
-                document.getElementById('person1Name').textContent = PersonalConfig.person1.name;
-                document.getElementById('person2Name').textContent = PersonalConfig.person2.name;
-                
-                // 更新纪念日信息
-                document.getElementById('anniversaryDate').textContent = PersonalConfig.importantDates.firstMeet.date;
-                document.getElementById('firstMeetDate').textContent = PersonalConfig.importantDates.firstMeet.date;
-                document.getElementById('firstMeetTitle').textContent = PersonalConfig.importantDates.firstMeet.title;
-                
-                // 更新生日信息
-                const birthdayCards = document.querySelectorAll('.time_card');
-                if (birthdayCards.length >= 4) {
-                    // 第三个卡片 - 王标生日
-                    const person1BirthdayCard = birthdayCards[2];
-                    person1BirthdayCard.querySelector('.day_title').textContent = `你来这人间的一天（${PersonalConfig.person1.name}）`;
-                    person1BirthdayCard.querySelector('.source').textContent = PersonalConfig.person1.birthday;
-                    
-                    // 第四个卡片 - 李玉佩生日
-                    const person2BirthdayCard = birthdayCards[3];
-                    person2BirthdayCard.querySelector('.day_title').textContent = `光落在你身上的日子（${PersonalConfig.person2.name}）`;
-                    person2BirthdayCard.querySelector('.source').textContent = PersonalConfig.person2.birthday;
+            var startDateStr = window.__customStartDateStr || '2024-07-29 21:23:00';
+            var startDate = new Date(formatToISO8601(startDateStr));
+
+
+            async function loadCustomData() {
+                try {
+                    const response = await fetch('./data.json', { cache: 'no-store' });
+                    if (!response.ok) {
+                        throw new Error('Failed to load data.json');
+                    }
+                    return await response.json();
+                } catch (error) {
+                    try {
+                        const text = await new Promise(function(resolve, reject) {
+                            const xhr = new XMLHttpRequest();
+                            xhr.open('GET', './data.json', true);
+                            xhr.onreadystatechange = function() {
+                                if (xhr.readyState === 4) {
+                                    if ((xhr.status >= 200 && xhr.status < 300) || (xhr.status === 0 && xhr.responseText)) {
+                                        resolve(xhr.responseText);
+                                    } else {
+                                        reject(new Error('XHR failed'));
+                                    }
+                                }
+                            };
+                            xhr.onerror = function() {
+                                reject(new Error('XHR error'));
+                            };
+                            xhr.send();
+                        });
+                        return JSON.parse(text);
+                    } catch (fallbackError) {
+                        console.error('读取 data.json 失败：', error, fallbackError);
+                        return null;
+                    }
                 }
-                
-                // 更新头像
-                const person1Avatar = document.querySelector('.img-male .aiv_touxiang');
-                const person2Avatar = document.querySelector('.img-female .aiv_touxiang');
-                if (person1Avatar) person1Avatar.src = PersonalConfig.person1.avatar;
-                if (person2Avatar) person2Avatar.src = PersonalConfig.person2.avatar;
-                
-                // 更新网站标题
-                document.title = PersonalConfig.siteConfig.title;
             }
-            
-            // 初始化时间显示功能
-            function initTimeDisplay() {
-                var startDateStr = PersonalConfig.importantDates.firstMeet.date + ' ' + PersonalConfig.importantDates.firstMeet.time;
-                var startDate = new Date(formatToISO8601(startDateStr));
-                var timeDisplay = document.getElementById('time-display');
 
-                // 检查元素和日期是否有效
-                if (!timeDisplay) {
-                    console.error('time-display element not found');
-                    return;
+            var timeDisplay = document.getElementById('time-display');
+
+            function updateTime() {
+
+                var now = new Date();
+
+                var timeDiff = now - startDate;
+
+                var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
+
+                timeDisplay.innerHTML = `<n class="num">${days}</n><span class="chinese">天 </span>` + `<n class="num">${('0' + hours).slice(-2)}</n><span class="chinese">时 </span>` + `<n class="num">${('0' + minutes).slice(-2)}</n><span class="chinese">分 </span>` + `<n class="num">${('0' + seconds).slice(-2)}</n><span class="chinese">秒</span>`;
+            }
+
+            document.addEventListener('DOMContentLoaded', async function() {
+                const customData = await loadCustomData();
+                if (customData) {
+                    window.applyCustomDataToPage(customData);
+                    window.saveCachedCustomData(customData);
                 }
-                
-                if (isNaN(startDate.getTime())) {
-                    console.error('Invalid start date:', startDateStr);
-                    return;
-                }
-
-                function updateTime() {
-                    var now = new Date();
-                    var timeDiff = now - startDate;
-
-                    var days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
-                    var hours = Math.floor((timeDiff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                    var minutes = Math.floor((timeDiff % (1000 * 60 * 60)) / (1000 * 60));
-                    var seconds = Math.floor((timeDiff % (1000 * 60)) / 1000);
-
-                    timeDisplay.innerHTML = `<n class="num">${days}</n><span class="chinese">天 </span>` + `<n class="num">${('0' + hours).slice(-2)}</n><span class="chinese">时 </span>` + `<n class="num">${('0' + minutes).slice(-2)}</n><span class="chinese">分 </span>` + `<n class="num">${('0' + seconds).slice(-2)}</n><span class="chinese">秒</span>`;
-                }
-
+                window.setCustomDataReady();
                 updateTime();
                 setInterval(updateTime, 1000);
-            }
-            
-            // 页面加载完成后初始化 - 移动到页面底部确保所有脚本加载完成
-
-            document.addEventListener('DOMContentLoaded', function() {
                 const anniversaryDateElement = document.getElementById('anniversaryDate');
                 const countdownElement = document.getElementById('countdownDisplay');
                 if (anniversaryDateElement) {
                     const anniversaryStr = anniversaryDateElement.textContent;
                     const [year,month,day] = anniversaryStr.split('-').map(Number);
                     const currentDate = new Date();
-                    const currentYear = currentDate.getFullYear();
-                    
-                    // 计算今年的纪念日
-                    let thisYearAnniversary = new Date(currentYear, month - 1, day);
-                    
-                    // 如果今年的纪念日已经过去，则计算明年的纪念日
-                    if (thisYearAnniversary < currentDate) {
-                        thisYearAnniversary = new Date(currentYear + 1, month - 1, day);
+                    currentDate.setHours(0, 0, 0, 0);
+                    let nextAnniversary = new Date(currentDate.getFullYear(),month - 1,day);
+                    nextAnniversary.setHours(0, 0, 0, 0);
+
+                    // 如果今年纪念日已经过去，则取下一年
+                    if (nextAnniversary < currentDate) {
+                        nextAnniversary = new Date(currentDate.getFullYear() + 1,month - 1,day);
+                        nextAnniversary.setHours(0, 0, 0, 0);
                     }
-                    
-                    const timeDiff = thisYearAnniversary - currentDate;
-                    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+
+                    const timeDiff = nextAnniversary - currentDate;
+                    const daysDiff = Math.max(0, Math.ceil(timeDiff / (1000 * 60 * 60 * 24)));
                     countdownElement.textContent = `距那一天，还有 ${daysDiff} 次心跳的期待`;
                     
                     // 添加进度条
@@ -745,9 +944,11 @@
                     const progressBar = document.createElement('div');
                     progressBar.className = 'progress-bar';
                     
-                    // 计算进度百分比 - 假设一年为基准
-                    const totalDays = 365;
-                    const passedDays = totalDays - daysDiff;
+                    // 计算本轮周年周期进度（自动兼容闰年）
+                    const lastAnniversary = new Date(nextAnniversary.getFullYear() - 1,month - 1,day);
+                    lastAnniversary.setHours(0, 0, 0, 0);
+                    const totalDays = Math.max(1, Math.round((nextAnniversary - lastAnniversary) / (1000 * 60 * 60 * 24)));
+                    const passedDays = Math.max(0, Math.round((currentDate - lastAnniversary) / (1000 * 60 * 60 * 24)));
                     const percentage = Math.max(0, Math.min(100, (passedDays / totalDays) * 100));
                     progressBar.style.width = `${percentage}%`;
                     
@@ -759,8 +960,6 @@
                     countdownElement.parentNode.appendChild(progressContainer);
                     countdownElement.parentNode.appendChild(progressText);
                 }
-                
-                
 
                 const firstMeetDateElement = document.getElementById('firstMeetDate');
                 const firstMeetCountdownElement = document.getElementById('firstMeetCountdown');
@@ -774,27 +973,40 @@
                     firstMeetCountdownElement.textContent = `自那日起，时光悄悄溜走了 ${daysDiff} 次朝霞与暮霭`;
                 }
 
-                const birthdayElements = document.querySelectorAll('.source');
-                const countdownElements = document.querySelectorAll('.format');
-                birthdayElements.forEach( (element, index) => {
-
-                    if (index > 1) {
-                        const birthdayStr = element.textContent;
-                        const [birthYear,birthMonth,birthDay] = birthdayStr.split('-').map(Number);
-                        const currentDate = new Date();
-                        const currentYear = currentDate.getFullYear();
-                        let thisYearBirthday = new Date(currentYear,birthMonth - 1,birthDay);
-
-                        if (thisYearBirthday < currentDate) {
-                            thisYearBirthday = new Date(currentYear + 1,birthMonth - 1,birthDay);
-                        }
-
-                        const timeDiff = thisYearBirthday - currentDate;
-                        const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
-                        countdownElements[index].textContent = `还有${daysDiff}天`;
+                [
+                    { dateId: 'maleBirthdayDate', countdownId: 'maleBirthdayCountdown' },
+                    { dateId: 'femaleBirthdayDate', countdownId: 'femaleBirthdayCountdown' }
+                ].forEach(function(item) {
+                    const birthdayElement = document.getElementById(item.dateId);
+                    const countdownElement = document.getElementById(item.countdownId);
+                    if (!birthdayElement || !countdownElement) {
+                        return;
                     }
-                }
-                );
+
+                    const birthdayStr = birthdayElement.textContent.trim();
+                    if (!/^\d{4}-\d{1,2}-\d{1,2}$/.test(birthdayStr)) {
+                        countdownElement.textContent = '';
+                        return;
+                    }
+
+                    const [birthYear,birthMonth,birthDay] = birthdayStr.split('-').map(Number);
+                    if ([birthYear, birthMonth, birthDay].some(Number.isNaN)) {
+                        countdownElement.textContent = '';
+                        return;
+                    }
+
+                    const currentDate = new Date();
+                    const currentYear = currentDate.getFullYear();
+                    let thisYearBirthday = new Date(currentYear,birthMonth - 1,birthDay);
+
+                    if (thisYearBirthday < currentDate) {
+                        thisYearBirthday = new Date(currentYear + 1,birthMonth - 1,birthDay);
+                    }
+
+                    const timeDiff = thisYearBirthday - currentDate;
+                    const daysDiff = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+                    countdownElement.textContent = `还有${daysDiff}天`;
+                });
             });
         </script>
         <script>
@@ -965,19 +1177,9 @@
                 }
             }
         </script>
-        <script src="js/personal-config.js"></script>
         <script src="./baozha/bubble.js"></script>
         <script src="js/effects.js"></script>
         <script src="js/photo-gallery.js"></script>
-        <script src="js/liquid-glass-effect.js"></script>
-        
-        <script>
-            // 确保所有脚本加载完成后再初始化
-            document.addEventListener('DOMContentLoaded', function() {
-                initPageWithConfig();
-                initTimeDisplay();
-            });
-        </script>
-        
+        <!-- 祝福卡片功能已移除 -->
     </body>
 </html>
