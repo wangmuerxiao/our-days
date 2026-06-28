@@ -4,31 +4,31 @@
 const PersonalConfig = {
     // 两个人的基本信息
     person1: {
-        name: '王标',
-        birthday: '2005-07-06',
+        name: '他',
+        birthday: '2000-01-01',
         avatar: 'image/nan.jpg'
     },
-    
+
     person2: {
-        name: '张佩麟', 
-        birthday: '2005-8-10',
+        name: '她',
+        birthday: '2000-01-01',
         avatar: 'image/nv.jpg'
     },
-    
+
     // 重要的纪念日期
     importantDates: {
         // 第一次相遇和确定关系（合并）
         firstMeet: {
-            date: '2017-09-01',
-            time: '13:14:00',
+            date: '2024-01-01',
+            time: '00:00:00',
             title: '我们第一次相遇的坐标',
             description: '那一天，命运让我们相遇，从这一刻开始，我们的故事正式开始'
         }
     },
-    
+
     // 网站配置
     siteConfig: {
-        title: '朋友纪念日倒计时',
+        title: '情侣纪念日倒计时',
         backgroundImage: 'image/beijing-1.webp',
         themeColor: '#ff6b6b'
     }
